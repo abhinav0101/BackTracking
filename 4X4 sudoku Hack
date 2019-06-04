@@ -1,0 +1,83 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<vector<int> > board(int A){
+	
+vector<vector<int> > D;
+	int x;
+	cout << "Enter the entries of the board";
+	cout <<endl;
+	vector<int> C;
+	for(int i= 0; i<A; i++){
+		C.clear();
+	for(int j=0; j<A; j++){
+		cin >>x;
+	C.push_back(x);
+}
+	D.push_back(C);
+}return D;  
+	
+}
+
+void print_board(vector<vector<int> > D){
+	cout << endl << "BOARD : " << endl << endl;
+	int A = D[0].size();
+	for(int i=0; i<A; i++){
+		for(int j=0; j<A; j++){
+			cout << D[i][j] << " ";
+		}
+		cout <<endl;
+	}}
+	
+bool isSafe(vector<vector<int> > D, int row, int col, int k){
+	int A= D.size();
+	for(int i= 0; i<A; i++){
+		if(D[row][i] == k) return false;	
+	}
+	for(int i= 0; i<A; i++){
+		if(D[i][col] == k) return false;	
+	}
+	return true;
+}	
+
+bool unassigned(vector<vector<int> > D, int& num){
+		int A = D.size();
+		int row = num/A;
+		int col = num%A;	
+	while(D[row][col] != 0){
+		num++;
+		if(num>=A*A) return false;
+		row = num/A;
+		col = num%A;
+}
+return true;
+}
+
+bool solve(vector<vector<int> >& D, int num){
+	int A= D.size();
+	if(num == A*A) return true;
+if(!unassigned(D, num)) return true;
+
+	int row = num/A;
+	int col = num%A;
+	
+for(int k=1; k<=A; k++){
+if(isSafe(D,row,col,k)){
+	D[row][col] = k;
+	if(solve(D,num+1)) return true;	
+	D[row][col] = 0;
+}
+}
+return false;
+}
+	
+int main() 
+{
+vector<vector<int> > D= board(4);
+print_board(D);
+if(solve(D,0)) print_board(D);
+else cout << "No solution";
+}
+
+ 
