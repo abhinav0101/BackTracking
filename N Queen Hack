@@ -1,0 +1,76 @@
+#include <iostream>
+using namespace std;
+
+bool isSafe(int board[][8], int N, int row, int col){
+	int i, j;
+	for(i=0; i<col; i++){
+		if(board[row][i]) return false;
+	};
+	
+	for(i=row, j = col; i>=0 && j>=0 ;i--, j--){
+		if(board[i][j]) return false;
+	}
+	
+	for(i=row,j=col; i<N && j>=0 ;i++, j--){
+		if(board[i][j]) return false;
+	}
+	return true;
+}
+
+bool solveNQueen(int board[][8], int N, int col){
+//base case, least amount of work!
+if(col>=N) return true; 
+
+// Consider this column and try placing  this queen in all rows one by one 
+      
+	for(int i=0; i<N ;i++){
+// Choose 
+		if(isSafe(board,8, i,col)) 
+		{
+		board[i][col] = 1;
+// Explore 
+	
+	if(solveNQueen(board, 8, col+1)) return true;
+// Unchoose
+	board[i][col] = 0;	
+}	
+}
+// if no solution whatsoever comes up
+return false;
+}
+
+bool PrintNQueen(int board[][8], int N){
+for(int i=0; i<N ; i++){
+	for(int j=0; j<N; j++){
+		cout << board[i][j] << " ";
+	}
+	cout << endl;
+}	
+return false;
+}
+
+
+int main(){
+
+int board[][8] = { 
+		{0, 0, 0, 0, 0, 0, 0, 0}, 
+        {0, 0, 0, 0, 0, 0, 0, 0}, 
+        {0, 0, 0, 0, 0, 0, 0, 0}, 
+        {0, 0, 0, 0, 0, 0, 0, 0},
+		{0, 0, 0, 0, 0, 0, 0, 0}, 
+        {0, 0, 0, 0, 0, 0, 0, 0}, 
+        {0, 0, 0, 0, 0, 0, 0, 0}, 
+        {0, 0, 0, 0, 0, 0, 0, 0}  
+    }; 
+  
+if (solveNQueen(board, 8, 0) == false) 
+    { 
+    	cout << "Solution does not exist"; 
+    	return false; 
+    } 
+    
+PrintNQueen(board, 8);	
+    return true;
+
+}
+
