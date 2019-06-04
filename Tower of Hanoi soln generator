@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+void tower_of_hanoi(int n, char from_rod, char to_rod, char aux_rod, int& steps) {
+
+	if(n==1){
+		cout << "move from rod " << from_rod << " to_rod " << to_rod << endl;
+		return;
+	}
+	else{
+		tower_of_hanoi(n-1, from_rod, aux_rod,to_rod, steps);steps++;
+		cout << "move from rod " << from_rod << " to_rod " << to_rod << endl; 
+		tower_of_hanoi(n-1, aux_rod, to_rod, from_rod, steps);steps++;
+	}
+}
+
+int main(){
+	cout << "Hey, this program solves for your Tower of Hanoi :- " << endl << endl;
+	cout << "Enter the number of disks that your Tower of Hanoi has " << endl;
+	int n;
+	cin >> n;
+	cout << " The solution would be :- " << endl;
+	char A = 'A', B = 'B', C = 'C';
+	int steps =0;
+	tower_of_hanoi(n, A , C, B, steps);
+	cout << " The number of steps involved in the solution were :- " << steps +1;
+}
+
