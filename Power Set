@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> subset{};
+
+void Allsubset(vector<vector<int> > &D, vector<int>& S, int e){
+int A = S.size();
+D.push_back(subset);
+
+for(int i = e; i<A; i++){
+subset.push_back(S[i]);
+Allsubset(D,S,i+1);
+subset.pop_back();
+}
+return ;
+}
+
+
+
+int main(){
+vector<int> S{1,2,3};
+vector<vector<int> > D;
+Allsubset(D, S, 0);
+
+for(int i=0; i<D.size(); i++){
+	for(int j=0; j<D[i].size(); j++){
+		cout << D[i][j] << "  ";}
+	cout << endl;
+}
+
+}
+
