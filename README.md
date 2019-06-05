@@ -1,2 +1,3 @@
 # BackTracking-Fun
-I add to this problems that I solve with back tracking
+BackTracking was the concept that really really got me into problem solving and programming.
+I add to this repository problems that I solve with back tracking and want to share the code.
